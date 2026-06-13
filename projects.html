@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHENG · 项目</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b10;
+    --surface: #10111a;
+    --text: #e2e4ea;
+    --accent: #7c6dff;
+    --accent2: #2dd4a8;
+    --muted: #9395a8;
+    --border: #1e1f2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 1s ease;
+  }
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  main { padding: 48px 0 100px; }
+
+  .project-item {
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-item:first-child { border-top: 1px solid var(--border); }
+  .project-meta {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 12px;
+  }
+  .project-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .project-date {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .project-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+  .project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .project-link:hover { border-bottom-color: var(--accent); }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 0 28px; }
+    h1 { font-size: 22px; }
+    .project-title { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">← 返回主页</a>
+    <h1>项目</h1>
+    <p class="subtitle">产品项目复盘、执行记录与成果展示</p>
+  </header>
+
+  <main>
+    <div class="project-item">
+      <div class="project-meta">
+        <span class="project-tag">测试项目</span>
+        <span class="project-date">2026 · Q2</span>
+      </div>
+      <div class="project-title">K200 4K APP 测试复盘</div>
+      <div class="project-desc">
+        作为测试项目经理，主导 K200 4K 摄像头的 APP 端全流程测试。涵盖测试方案设计、用例编写、执行跟踪、缺陷管理与最终报告输出。记录从 0 到 1 搭建测试体系的完整路径。
+      </div>
+      <a href="#" class="project-link">查看详情 →</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <span class="project-tag">用户研究</span>
+        <span class="project-date">2026 · Q1</span>
+      </div>
+      <div class="project-title">用户需求洞察方法论</div>
+      <div class="project-desc">
+        如何通过用户访谈、行为数据和场景还原，挖掘用户没说出口的真实痛点。整理出一套可复用的需求分析框架。
+      </div>
+      <a href="#" class="project-link">查看详情 →</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <span class="project-tag">产品迭代</span>
+        <span class="project-date">2025 · Q4</span>
+      </div>
+      <div class="project-title">从 0 到 1 的产品迭代全记录</div>
+      <div class="project-desc">
+        一个功能从灵感到上线的生命周期追踪。记录了每个关键决策的上下文、踩过的坑和意外的收获。
+      </div>
+      <a href="#" class="project-link">查看详情 →</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <span class="project-tag">占位</span>
+        <span class="project-date">持续更新</span>
+      </div>
+      <div class="project-title" style="color:var(--muted); font-style:italic;">下一个项目...</div>
+      <div class="project-desc">
+        新的项目正在路上，留个位置给未来的自己。
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+  </footer>
+</div>
+</body>
+</html>

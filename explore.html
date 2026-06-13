@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHENG · 学习与探索</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b10;
+    --surface: #10111a;
+    --text: #e2e4ea;
+    --accent: #7c6dff;
+    --accent2: #2dd4a8;
+    --muted: #9395a8;
+    --border: #1e1f2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 1s ease;
+  }
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  main { padding: 48px 0 100px; }
+
+  .explore-section {
+    margin-bottom: 48px;
+  }
+  .explore-section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .note-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .note-item:first-child { border-top: 1px solid var(--border); }
+  .note-meta {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 10px;
+  }
+  .note-type {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .note-type.book { background: rgba(124,109,255,0.15); color: var(--accent); }
+  .note-type.idea { background: rgba(45,212,168,0.15); color: var(--accent2); }
+  .note-type.tech { background: rgba(124,109,255,0.1); color: #a78bfa; }
+  .note-date { font-size: 12px; color: var(--muted); }
+  .note-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .note-body {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .note-tags {
+    margin-top: 12px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .note-tag {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 0 28px; }
+    h1 { font-size: 22px; }
+    .note-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">← 返回主页</a>
+    <h1>学习与探索</h1>
+    <p class="subtitle">读书笔记、新技术尝试、灵感碎片</p>
+  </header>
+
+  <main>
+    <div class="explore-section">
+      <div class="explore-section-title">📖 读书笔记</div>
+      
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type book">读书笔记</span>
+          <span class="note-date">2026 · 近期</span>
+        </div>
+        <div class="note-title">《启示录》—— 为什么好产品是管出来的</div>
+        <div class="note-body">
+          产品管理的核心不是写文档，而是建立正确的决策机制。书中关于"产品经理与项目经理的区别"让我重新思考了自己的定位。
+        </div>
+        <div class="note-tags">
+          <span class="note-tag">产品管理</span>
+          <span class="note-tag">团队</span>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type book">读书笔记</span>
+          <span class="note-date">2026 · 待补充</span>
+        </div>
+        <div class="note-title" style="color:var(--muted); font-style:italic;">下一本要读的书...</div>
+        <div class="note-body">书单持续更新中，欢迎推荐。</div>
+      </div>
+    </div>
+
+    <div class="explore-section">
+      <div class="explore-section-title">🔭 技术探索</div>
+      
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type tech">技术</span>
+          <span class="note-date">2026 · Q1</span>
+        </div>
+        <div class="note-title">AI 对产品经理工作的影响</div>
+        <div class="note-body">
+          从需求分析到竞品调研，AI 工具正在改变产品经理的工作方式。记录我尝试用 AI 辅助日常工作的实验和心得。
+        </div>
+        <div class="note-tags">
+          <span class="note-tag">AI</span>
+          <span class="note-tag">效率</span>
+          <span class="note-tag">工具</span>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type tech">技术</span>
+          <span class="note-date">持续探索</span>
+        </div>
+        <div class="note-title" style="color:var(--muted); font-style:italic;">下一个技术方向...</span></div>
+        <div class="note-body">保持好奇心，持续探索新技术对产品的可能性。</div>
+      </div>
+    </div>
+
+    <div class="explore-section">
+      <div class="explore-section-title">💡 灵感碎片</div>
+      
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type idea">灵感</span>
+          <span class="note-date">随时记录</span>
+        </div>
+        <div class="note-title">无聊是灵感的催化剂</div>
+        <div class="note-body">
+          最好的想法往往出现在不刻意思考的时候。散步、发呆、看窗外——这些"无用"的时间，反而是创意的孵化器。
+        </div>
+        <div class="note-tags">
+          <span class="note-tag">创意</span>
+          <span class="note-tag">思考</span>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-meta">
+          <span class="note-type idea">灵感</span>
+          <span class="note-date">随时记录</span>
+        </div>
+        <div class="note-title" style="color:var(--muted); font-style:italic;">新的灵感...</span></div>
+        <div class="note-body">随时捕捉，随时记录。</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+  </footer>
+</div>
+</body>
+</html>

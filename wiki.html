@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHENG · 知识库</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b10;
+    --surface: #10111a;
+    --text: #e2e4ea;
+    --accent: #7c6dff;
+    --accent2: #2dd4a8;
+    --muted: #9395a8;
+    --border: #1e1f2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 1s ease;
+  }
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  main { padding: 48px 0 100px; }
+
+  .wiki-category {
+    margin-bottom: 48px;
+  }
+  .wiki-category-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wiki-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .wiki-item {
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s ease;
+  }
+  .wiki-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(124,109,255,0.12);
+    transform: translateY(-2px);
+  }
+  .wiki-item-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .wiki-item-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .wiki-item-tag {
+    font-size: 11px;
+    color: var(--accent2);
+    margin-top: 8px;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 0 28px; }
+    h1 { font-size: 22px; }
+    .wiki-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">← 返回主页</a>
+    <h1>知识库</h1>
+    <p class="subtitle">方法论、模板、SOP 与个人知识体系</p>
+  </header>
+
+  <main>
+    <div class="wiki-category">
+      <div class="wiki-category-title">📋 产品方法论</div>
+      <div class="wiki-grid">
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">用户需求分析框架</div>
+          <div class="wiki-item-desc">从模糊反馈到清晰需求的完整拆解流程</div>
+          <div class="wiki-item-tag">方法论 · 持续更新</div>
+        </a>
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">产品复盘模板</div>
+          <div class="wiki-item-desc">每次迭代后的标准复盘结构，包含数据回顾、决策复盘、改进方向</div>
+          <div class="wiki-item-tag">模板 · 可直接复用</div>
+        </a>
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">PRD 撰写规范</div>
+          <div class="wiki-item-desc">如何写一份让开发看得懂、愿意看的产品需求文档</div>
+          <div class="wiki-item-tag">SOP · 实战积累</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="wiki-category">
+      <div class="wiki-category-title">🧪 测试与质量</div>
+      <div class="wiki-grid">
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">测试用例设计指南</div>
+          <div class="wiki-item-desc">边界值、等价类、场景法的实际应用场景</div>
+          <div class="wiki-item-tag">指南</div>
+        </a>
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">缺陷管理 SOP</div>
+          <div class="wiki-item-desc">从发现、记录、跟踪到回归验证的标准化流程</div>
+          <div class="wiki-item-tag">SOP</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="wiki-category">
+      <div class="wiki-category-title">💡 个人工具集</div>
+      <div class="wiki-grid">
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">我的效率工具清单</div>
+          <div class="wiki-item-desc">日常使用的工具、插件、自动化流程汇总</div>
+          <div class="wiki-item-tag">工具</div>
+        </a>
+        <a href="#" class="wiki-item">
+          <div class="wiki-item-title">知识管理方法论</div>
+          <div class="wiki-item-desc">如何构建个人的知识体系，让碎片信息变成可用资产</div>
+          <div class="wiki-item-tag">方法论</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="wiki-category">
+      <div class="wiki-category-title">📌 待补充</div>
+      <div class="wiki-grid">
+        <a href="#" class="wiki-item" style="border-style:dashed;">
+          <div class="wiki-item-title" style="color:var(--muted);">新的知识条目...</div>
+          <div class="wiki-item-desc">持续积累中，每有新的沉淀就更新到这里</div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+  </footer>
+</div>
+</body>
+</html>

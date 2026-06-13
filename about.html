@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHENG · 关于我</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b10;
+    --surface: #10111a;
+    --text: #e2e4ea;
+    --accent: #7c6dff;
+    --accent2: #2dd4a8;
+    --muted: #9395a8;
+    --border: #1e1f2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 1s ease;
+  }
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  main { padding: 48px 0 100px; }
+
+  .about-section {
+    margin-bottom: 48px;
+  }
+  .about-section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .about-text {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 2;
+    margin-bottom: 16px;
+  }
+
+  .skill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .skill-tag {
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .contact-list {
+    list-style: none;
+  }
+  .contact-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-icon {
+    width: 32px; height: 32px;
+    background: var(--surface);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .contact-label { font-size: 13px; color: var(--muted); }
+  .contact-value {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .contact-value a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .contact-value a:hover { text-decoration: underline; }
+
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 24px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(124,109,255,0.4);
+  }
+  .timeline-date {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .timeline-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  .quote {
+    padding: 40px 0;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-style: italic;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 0 28px; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">← 返回主页</a>
+    <h1>关于我</h1>
+    <p class="subtitle">个人介绍、联系方式与简历</p>
+  </header>
+
+  <main>
+    <div class="about-section">
+      <div class="about-section-title">👋 我是谁</div>
+      <p class="about-text">
+        你好，我是 ENHENG，一名产品经理。<br><br>
+        擅长在混乱中找秩序，在无聊中找灵感。<br><br>
+        我相信好产品不是赶出来的，而是在反复打磨和复盘中自然生长出来的。这里是我的个人空间，存放项目复盘、工作方法论和一些突然冒出来的想法。
+      </p>
+    </div>
+
+    <div class="quote">
+      "经常因为无聊产生灵感"
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-title">🛠️ 技能栈</div>
+      <div class="skill-grid">
+        <span class="skill-tag">产品设计</span>
+        <span class="skill-tag">用户研究</span>
+        <span class="skill-tag">需求分析</span>
+        <span class="skill-tag">数据分析</span>
+        <span class="skill-tag">复盘总结</span>
+        <span class="skill-tag">项目管理</span>
+        <span class="skill-tag">测试管理</span>
+        <span class="skill-tag">跨部门协作</span>
+        <span class="skill-tag">知识管理</span>
+        <span class="skill-tag">PRD 撰写</span>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-title">📅 经历</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2025 — 至今</div>
+          <div class="timeline-title">产品经理</div>
+          <div class="timeline-desc">负责产品规划、需求分析、项目推进与复盘总结</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">待补充</div>
+          <div class="timeline-title" style="color:var(--muted); font-style:italic;">下一段经历...</div>
+          <div class="timeline-desc">未来可期</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-title">📬 联系方式</div>
+      <ul class="contact-list">
+        <li>
+          <div class="contact-icon">🐙</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value"><a href="https://github.com/ENHENG-Workhub">ENHENG-Workhub</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">邮箱</div>
+            <div class="contact-value">your@email.com</div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">微信</div>
+            <div class="contact-value">your_wechat_id</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-title">📄 简历</div>
+      <p class="about-text">
+        简历文件待上传。如需合作或了解更多，欢迎通过上方联系方式联系我。
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+  </footer>
+</div>
+</body>
+</html>
