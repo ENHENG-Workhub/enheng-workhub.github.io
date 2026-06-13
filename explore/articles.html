@@ -1,17 +1,20 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ENHENG · 好文章推荐</title>
+<title>好文章推荐 · ENHENG</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0b10;
     --surface: #10111a;
+    --surface2: #161722;
     --text: #e2e4ea;
     --accent: #7c6dff;
     --accent2: #2dd4a8;
+    --accent3: #ffa03c;
     --muted: #9395a8;
     --border: #1e1f2e;
   }
@@ -22,236 +25,263 @@
     color: var(--text);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
   }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-  header {
-    padding: 60px 0 40px;
-    border-bottom: 1px solid var(--border);
-    animation: fadeUp 1s ease;
-  }
-  h1 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-  .subtitle {
-    color: var(--muted);
-    font-size: 14px;
-    font-weight: 300;
-  }
+  /* ── Header ── */
+  header { padding: 24px 0 16px; border-bottom: 1px solid var(--border); }
   .back-link {
-    display: inline-block;
-    margin-bottom: 16px;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 13px;
-    transition: transform 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; transition: color 0.3s;
   }
-  .back-link:hover { transform: translateX(-4px); }
-
-  /* 主布局 */
-  .reads-layout {
-    display: flex;
-    gap: 32px;
-    padding: 48px 0;
-    min-height: calc(100vh - 260px);
+  .back-link:hover { color: var(--text); }
+  .page-header-content { margin-top: 24px; }
+  .page-title {
+    font-size: 32px; font-weight: 700; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .page-subtitle {
+    margin-top: 8px; font-size: 15px; color: var(--muted); max-width: 600px;
   }
 
-  /* 左侧文章列表 */
-  .article-list {
-    width: 240px;
-    flex-shrink: 0;
+  /* ── Layout: Sidebar + Content ── */
+  .articles-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    margin-top: 32px;
+    min-height: calc(100vh - 200px);
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
     position: sticky;
-    top: 40px;
-    height: fit-content;
+    top: 0;
   }
-  .article-list-title {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
-  .article-item {
-    padding: 12px 16px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.45;
-    position: relative;
-  }
-  .article-item:hover {
-    opacity: 0.7;
-    background: rgba(124,109,255,0.08);
-  }
-  .article-item.active {
-    opacity: 1;
-    background: rgba(124,109,255,0.12);
-  }
-  .article-item.active::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 60%;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-  .article-item-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .article-item-meta {
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  /* 右侧预览区 */
-  .preview-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .browser-mockup {
-    background: #16172a;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-    transition: transform 0.4s ease, opacity 0.4s ease;
-  }
-  .browser-bar {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #0c0d18;
+  .sidebar-title {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); padding: 0 24px 16px;
     border-bottom: 1px solid var(--border);
-    gap: 8px;
   }
-  .browser-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--border);
+  .article-nav { list-style: none; }
+  .article-nav-item {
+    padding: 16px 24px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
   }
-  .browser-dot:nth-child(1) { background: #ff5f57; }
-  .browser-dot:nth-child(2) { background: #febc2e; }
-  .browser-dot:nth-child(3) { background: #28c840; }
-  .browser-url {
-    flex: 1;
-    margin-left: 12px;
-    padding: 6px 12px;
-    background: var(--bg);
-    border-radius: 6px;
-    font-size: 11px;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .article-nav-item:hover {
+    background: var(--surface2);
   }
-  .browser-content {
-    padding: 32px;
-    min-height: 360px;
-    position: relative;
-    background: linear-gradient(135deg, #0f0f1a, #151528);
+  .article-nav-item.active {
+    background: var(--surface2);
+    border-left-color: var(--accent);
   }
-  .browser-content h2 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 22px;
-    margin-bottom: 16px;
+  .nav-title {
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
   }
-  .browser-content p {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 12px;
-    line-height: 1.8;
+  .nav-index {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--border); color: var(--muted);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    transition: all 0.3s;
   }
-  .browser-content .placeholder-img {
-    width: 100%;
-    height: 160px;
-    background: linear-gradient(135deg, #1a1a2e, #222244);
-    border-radius: 8px;
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 12px;
+  .article-nav-item.active .nav-index {
+    background: var(--accent); color: #fff;
+  }
+  .nav-meta { font-size: 12px; color: var(--muted); }
+  .nav-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; margin-right: 6px;
+    background: rgba(124,109,255,0.15); color: var(--accent);
   }
 
-  /* 摘要卡片 */
-  .summary-card {
-    background: rgba(16,17,26,0.92);
-    backdrop-filter: blur(12px);
+  /* ── Main Content ── */
+  .main-content {
+    padding: 32px 40px;
+    overflow-y: auto;
+  }
+
+  /* ── Article Section ── */
+  .article-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .article-section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .article-source {
+    font-size: 13px; color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .article-source a { color: var(--accent); text-decoration: none; }
+  .article-source a:hover { text-decoration: underline; }
+
+  .article-heading {
+    font-size: 26px; font-weight: 700; margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Preview Area (screenshot) ── */
+  .preview-container {
+    position: relative;
+    display: block;
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
-    position: relative;
-    margin-top: -40px;
-    z-index: 2;
-  }
-  .summary-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-  .summary-tag {
-    padding: 4px 12px;
-    background: rgba(124,109,255,0.15);
-    border-radius: 20px;
-    font-size: 11px;
-    color: var(--accent);
-  }
-  .summary-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text);
-  }
-  .read-more-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
-    padding: 8px 20px;
-    background: var(--accent);
-    color: #fff;
+    overflow: hidden;
+    background: var(--surface);
+    margin-bottom: 40px;
     text-decoration: none;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+  .preview-container:hover {
+    box-shadow: 0 4px 30px rgba(124,109,255,0.15);
+  }
+  .preview-img {
+    width: 100%; display: block; opacity: 0.9;
+    transition: opacity 0.3s;
+  }
+  .preview-container:hover .preview-img { opacity: 0.7; }
+  .preview-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    justify-content: flex-end;
+    padding: 32px 40px;
+    background: linear-gradient(to top, rgba(10,11,16,0.95) 0%, rgba(10,11,16,0.7) 60%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .preview-container:hover .preview-overlay { opacity: 1; }
+  .overlay-title {
+    font-size: 22px; font-weight: 700; margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff, #ccc);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .overlay-summary {
+    font-size: 15px; color: var(--muted); max-width: 560px;
+    line-height: 1.6;
+  }
+  .preview-fallback {
+    padding: 80px 40px; text-align: center;
+    color: var(--muted); font-size: 14px;
+  }
+  .preview-fallback .icon { font-size: 48px; margin-bottom: 16px; }
+
+  /* ── Reading Notes ── */
+  .notes-header {
+    font-size: 18px; font-weight: 600; margin-bottom: 24px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .notes-header span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .note-block {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .note-block:nth-child(even) { border-left-color: var(--accent2); }
+  .note-block:nth-child(3n) { border-left-color: var(--accent3); }
+
+  .note-label {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .note-block p {
+    margin-bottom: 12px; font-size: 15px;
+  }
+  .note-block p:last-child { margin-bottom: 0; }
+
+  .quote-text {
+    font-style: italic; color: var(--muted);
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+    margin: 12px 0;
+  }
+
+  .insight {
+    background: var(--surface2);
+    padding: 20px;
     border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: background 0.2s;
-  }
-  .read-more-btn:hover { background: #6555e6; }
-
-  /* 动画 */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    margin-top: 16px;
   }
 
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 20px;
+  }
+  .tag {
+    padding: 4px 14px; border-radius: 20px;
+    background: var(--surface2);
+    color: var(--muted); font-size: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Footer ── */
   footer {
-    padding: 32px 0;
+    padding: 40px 0; margin-top: 64px;
     border-top: 1px solid var(--border);
     text-align: center;
+    font-size: 13px; color: var(--muted);
   }
-  footer p { color: var(--muted); font-size: 12px; }
   footer a { color: var(--accent); text-decoration: none; }
 
+  /* ── Mobile ── */
   @media (max-width: 768px) {
-    .reads-layout { flex-direction: column; }
-    .article-list { width: 100%; position: static; display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; }
-    .article-item { min-width: 180px; margin-bottom: 0; }
-    .browser-content { padding: 20px; }
+    .articles-layout {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      position: relative;
+      max-height: none;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .article-nav {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 0 16px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+    .article-nav::-webkit-scrollbar { display: none; }
+    .article-nav-item {
+      flex-shrink: 0;
+      border-left: none;
+      border-bottom: 3px solid transparent;
+      padding: 12px 16px;
+      border-radius: 8px;
+    }
+    .article-nav-item.active {
+      border-bottom-color: var(--accent);
+    }
+    .main-content { padding: 24px 16px; }
+    .preview-overlay { padding: 20px; }
+    .overlay-title { font-size: 18px; }
+    .overlay-summary { font-size: 14px; }
   }
 </style>
 </head>
@@ -259,121 +289,216 @@
 <div class="container">
   <header>
     <a href="../explore.html" class="back-link">← 返回上一页</a>
-    <h1>好文章推荐</h1>
-    <p class="subtitle">值得反复阅读的文章，附带阅读笔记与个人思考</p>
+    <div class="page-header-content">
+      <h1 class="page-title">好文章推荐</h1>
+      <p class="page-subtitle">精选阅读笔记 · 产品思考 · 哲学碎片</p>
+    </div>
   </header>
 
-  <div class="reads-layout">
-    <div class="article-list">
-      <div class="article-list-title">文章列表</div>
-      <div class="article-item active" data-article="1" onclick="switchArticle(1)">
-        <div class="article-item-title">J.J. Gibson：世界的意义</div>
-        <div class="article-item-meta">Ralph Ammer · 感知哲学</div>
-      </div>
-      <div class="article-item" data-article="2" onclick="switchArticle(2)">
-        <div class="article-item-title">Wise Thought</div>
-        <div class="article-item-meta">Jack Kornfield · 正念智慧</div>
-      </div>
-      <div class="article-item" data-article="3" onclick="switchArticle(3)">
-        <div class="article-item-title">产品经理的底层逻辑</div>
-        <div class="article-item-meta">产品沉思录 · 方法论</div>
-      </div>
-    </div>
+  <div class="articles-layout">
+    <!-- 左侧导航 -->
+    <nav class="sidebar">
+      <div class="sidebar-title">文章列表</div>
+      <ul class="article-nav">
+        <li class="article-nav-item active" onclick="switchArticle(0)">
+          <div class="nav-title"><span class="nav-index">1</span>J.J. Gibson 感知哲学</div>
+          <div class="nav-meta"><span class="nav-tag">哲学</span><span class="nav-tag">感知</span>ralphammer.com</div>
+        </li>
+        <li class="article-nav-item" onclick="switchArticle(1)">
+          <div class="nav-title"><span class="nav-index">2</span>Jack Kornfield 正念思考</div>
+          <div class="nav-meta"><span class="nav-tag">正念</span><span class="nav-tag">心理</span>jackkornfield.com</div>
+        </li>
+        <li class="article-nav-item" onclick="switchArticle(2)">
+          <div class="nav-title"><span class="nav-index">3</span>产品沉思录方法论</div>
+          <div class="nav-meta"><span class="nav-tag">产品</span><span class="nav-tag">方法论</span>pmthinking.notion.site</div>
+        </li>
+      </ul>
+    </nav>
 
-    <div class="preview-area">
-      <div class="browser-mockup" id="browserMockup">
-        <div class="browser-bar">
-          <div class="browser-dot"></div>
-          <div class="browser-dot"></div>
-          <div class="browser-dot"></div>
-          <div class="browser-url" id="browserUrl">ralphammer.com/j-j-gibson-the-meaning-of-the-world/</div>
+    <!-- 主内容区 -->
+    <div class="main-content">
+
+      <!-- Article 1 -->
+      <div class="article-section active" id="article-0">
+        <div class="article-source">
+          🌐 来源：<a href="https://ralphammer.com/j-j-gibson-the-meaning-of-the-world/" target="_blank">ralphammer.com · J.J. Gibson—The meaning of the world</a>
         </div>
-        <div class="browser-content" id="browserContent">
-          <h2>J.J. Gibson — The Meaning of the World</h2>
-          <p>我们是否被隔绝在外部世界之外，仅被困于个人经验之中？1979 年心理学家 J.J. Gibson 提出了一种不同的观点——它能改变我们看待世界的方式。</p>
-          <div class="placeholder-img">📖 原文预览</div>
-          <p>Gibson 拒绝"间接感知"模型，提出"直接生态感知"：我们不是被动接收刺激的相机，而是用"身体在环境中的视觉系统"主动探索世界，从中拾取"可供性"（affordances）。</p>
+        <h2 class="article-heading">J.J. Gibson — 世界的意义</h2>
+
+        <a class="preview-container" href="https://ralphammer.com/j-j-gibson-the-meaning-of-the-world/" target="_blank" rel="noopener">
+          <!-- 替换为实际截图：<img class="preview-img" src="../images/article1.png" alt="Gibson 原文截图"> -->
+          <div class="preview-fallback">
+            <div class="icon">📷</div>
+            请将原文截图保存至 <b>../images/article1.png</b><br>然后替换此区域为 &lt;img class="preview-img" src="../images/article1.png"&gt;
+          </div>
+          <div class="preview-overlay">
+            <div class="overlay-title">J.J. Gibson: 我们不是世界的陌生人</div>
+            <div class="overlay-summary">从"看"到"感知"——Gibson 提醒我们，视觉不只是接收光线，而是理解世界赋予我们的"行动可能性"。一把椅子邀请我们坐下，一扇门邀请我们推开。环境不是中性的，它充满意义。</div>
+          </div>
+        </a>
+
+        <div class="notes-header"><span>📝 阅读笔记</span></div>
+
+        <div class="note-block">
+          <div class="note-label">核心原文摘录</div>
+          <p class="quote-text">"We are not strangers in this world. We are part of it. And this means something."</p>
+          <p>Gibson 的核心观点：视觉不是被动接收图像，而是主动寻找环境中的"affordance"（可供性）——事物向我们"提供"的行动可能性。</p>
+        </div>
+
+        <div class="note-block">
+          <div class="note-label">中文翻译</div>
+          <p>我们并非这个世界的异乡人。我们是它的一部分。而这，本身就意味着什么。</p>
+          <p>一把椅子不是"一个有四条腿的木制物体"——它是在说"坐下"。一扇门不是"一块竖着的木板"——它是在说"推开"。环境不是中性的背景板，它充满了对我们发出的邀请。</p>
+        </div>
+
+        <div class="note-block">
+          <div class="note-label">产品思考</div>
+          <p><strong>1. 产品的 affordance 比功能更重要。</strong> 用户不会读说明书，好产品应该"自己说话"。一个按钮看起来就该能按，一个输入框看起来就该能打字。如果用户需要思考"这个东西怎么用"，设计就失败了。</p>
+          <p><strong>2. 环境塑造行为。</strong> Gibson 说环境充满意义——产品也是用户的环境。微信的"撤回"2分钟设计，不只是功能，更是在塑造一种"你可以后悔"的安全感。好的产品设计是在创造一种有意义的交互环境。</p>
+          <p><strong>3. "感知"先于"认知"。</strong> 用户在使用产品之前就已经在感知它了——视觉、触觉、甚至情绪预判。第一印象不是理性的，是感知层面的。这也是为什么很多功能强大的产品输给了"看起来好用"的产品。</p>
+        </div>
+
+        <div class="note-block">
+          <div class="insight">
+            <strong>💡 个人思考</strong><br><br>
+            Gibson 的哲学最打动我的是这句话——"我们不是世界的陌生人"。<br><br>
+            做产品久了容易陷入一个误区：觉得用户需要被"引导"、被"教育"。但 Gibson 提醒我们，用户天生就能感知到什么是好的设计——就像人天生就知道一把椅子是用来坐的。<br><br>
+            真正的挑战不是教用户怎么用，而是让产品本身"说清楚"。<br>
+            不要教育用户，要倾听他们的感知本能。
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag">可供性</span>
+          <span class="tag">感知设计</span>
+          <span class="tag">环境意义</span>
+          <span class="tag">直觉交互</span>
         </div>
       </div>
 
-      <div class="summary-card" id="summaryCard">
-        <div class="summary-tags">
-          <span class="summary-tag">直接感知</span>
-          <span class="summary-tag">可供性</span>
-          <span class="summary-tag">环境设计</span>
+      <!-- Article 2 -->
+      <div class="article-section" id="article-1">
+        <div class="article-source">
+          🌐 来源：<a href="https://jackkornfield.com/wise-thought/" target="_blank">jackkornfield.com · Wise Thought</a>
         </div>
-        <div class="summary-text" id="summaryText">
-          Gibson 认为我们并非与一个无意义几何世界对峙的"外星灵魂"，而是栖息于环境中的动物。我们不断环顾四周，拾取环境所提供的机会。世界的意义不是头脑虚构的，而是动物与环境关系的产物——我们不是创造意义，而是发现它。
+        <h2 class="article-heading">Jack Kornfield — 智慧之思</h2>
+
+        <a class="preview-container" href="https://jackkornfield.com/wise-thought/" target="_blank" rel="noopener">
+          <!-- 替换为实际截图：<img class="preview-img" src="../images/article2.png" alt="Kornfield 原文截图"> -->
+          <div class="preview-fallback">
+            <div class="icon">📷</div>
+            请将原文截图保存至 <b>../images/article2.png</b><br>然后替换此区域为 &lt;img class="preview-img" src="../images/article2.png"&gt;
+          </div>
+          <div class="preview-overlay">
+            <div class="overlay-title">正念不是逃避，是更深地进入当下</div>
+            <div class="overlay-summary">Kornfield 将东方禅修智慧带入西方语境。他的核心主张：正念不是让你变成另一个人，而是让你更真实地成为自己——接纳脆弱、拥抱不确定、在不完美中找到自由。</div>
+          </div>
+        </a>
+
+        <div class="notes-header"><span>📝 阅读笔记</span></div>
+
+        <div class="note-block">
+          <div class="note-label">核心观点摘要</div>
+          <p>Jack Kornfield 是西方最具影响力的正念导师之一，他将缅甸禅修传统引入美国硅谷心理学语境。他的文章核心围绕：</p>
+          <p>• 正念不是追求完美，而是接纳当下的不完美<br>
+          • 焦虑不是敌人，而是内心在提醒你"有什么需要注意了"<br>
+          • 真正的自由不是控制一切，而是学会与不可控共处</p>
         </div>
-        <a href="article1.html" class="read-more-btn">📝 查看阅读笔记 →</a>
+
+        <div class="note-block">
+          <div class="note-label">产品思考</div>
+          <p><strong>1. 产品也可以有"正念设计"。</strong> 现在的互联网产品都在争夺用户注意力——无限滚动、推送通知、红点焦虑。但反其道而行之呢？一个提醒用户"你已经看够了"的功能，一个主动说"休息一下"的界面——这可能是更高级的用户关系。</p>
+          <p><strong>2. 接纳用户的"负面情绪"。</strong> Kornfield 说焦虑不是敌人——产品也应该这样想。用户在使用产品时的挫败感、犹豫、放弃，不是"需要消灭的 bug"，而是"需要倾听的信号"。好的产品经理会把用户放弃的瞬间当作最珍贵的反馈。</p>
+          <p><strong>3. "少即是多"的正念版。</strong> 正念教我们放下执念，产品也该学会"放下"——放下不必要的功能、放下过度设计、放下"我们必须做点什么"的冲动。有时候最好的迭代是决定不做任何事。</p>
+        </div>
+
+        <div class="note-block">
+          <div class="insight">
+            <strong>💡 个人思考</strong><br><br>
+            读完 Kornfield 最大的感受是——我们太习惯于"解决问题"的思维了。<br><br>
+            产品人看到用户反馈就想去"修复"，但 Kornfield 说：有些东西不需要修复，只需要被看见。<br><br>
+            这不是说产品不需要迭代，而是说——在动手之前，先停下来，真正理解用户在经历什么。<br>
+            有时候"理解"本身就是最好的解决方案。
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag">正念</span>
+          <span class="tag">注意力设计</span>
+          <span class="tag">用户情绪</span>
+          <span class="tag">极简主义</span>
+        </div>
       </div>
+
+      <!-- Article 3 -->
+      <div class="article-section" id="article-2">
+        <div class="article-source">
+          🌐 来源：<a href="https://pmthinking.notion.site/2c32f8e86e15807394a7cf8e36b34d14?source=copy_link" target="_blank">pmthinking.notion.site · 产品沉思录</a>
+        </div>
+        <h2 class="article-heading">产品沉思录 — 方法论的力量</h2>
+
+        <a class="preview-container" href="https://pmthinking.notion.site/2c32f8e86e15807394a7cf8e36b34d14?source=copy_link" target="_blank" rel="noopener">
+          <!-- 替换为实际截图：<img class="preview-img" src="../images/article3.png" alt="产品沉思录 原文截图"> -->
+          <div class="preview-fallback">
+            <div class="icon">📷</div>
+            请将原文截图保存至 <b>../images/article3.png</b><br>然后替换此区域为 &lt;img class="preview-img" src="../images/article3.png"&gt;
+          </div>
+          <div class="preview-overlay">
+            <div class="overlay-title">产品方法论不是答案，是思考的起点</div>
+            <div class="overlay-summary">产品沉思录系列从方法论角度探讨如何做产品决策、如何判断需求真伪、如何建立产品人的思考框架。核心观点：方法论不是标准答案，而是帮你问出更好问题的工具。</div>
+          </div>
+        </a>
+
+        <div class="notes-header"><span>📝 阅读笔记</span></div>
+
+        <div class="note-block">
+          <div class="note-label">核心观点摘要</div>
+          <p>产品沉思录（PM Thinking）是一系列关于产品方法论的深度文章，涉及：</p>
+          <p>• 需求判断——如何区分"用户说的"和"用户真正需要的"<br>
+          • 优先级框架——资源有限时如何做取舍<br>
+          • 产品决策机制——建立可复用的思考框架而非依赖直觉<br>
+          • 产品人的元认知——"我怎么知道我知道什么"</p>
+        </div>
+
+        <div class="note-block">
+          <div class="note-label">产品思考</div>
+          <p><strong>1. 需求判断的本质是"翻译"。</strong> 用户说"我要一匹更快的马"，但真正需要的是"更快的交通工具"。产品人的核心能力不是听用户说什么，而是翻译出用户没说什么。这个翻译过程需要方法论支撑——否则就是猜。</p>
+          <p><strong>2. 优先级是产品人的核心能力。</strong> 资源永远不够，时间永远不够。能决定"现在不做"比决定"现在做"更能体现产品功力。方法论框架（如 ICE、RICE）不是用来算分的，是用来强迫你想清楚"为什么做"的。</p>
+          <p><strong>3. 好产品是"管"出来的，不是"做"出来的。</strong> 产品管理本质上是决策管理——建立一套机制，让每个决策都有据可依，而不是拍脑袋。</p>
+        </div>
+
+        <div class="note-block">
+          <div class="insight">
+            <strong>💡 个人思考</strong><br><br>
+            产品方法论读多了会有个错觉：觉得掌握了框架就等于掌握了产品。但实际上，框架只是起点。<br><br>
+            • 框架告诉你"该想什么"，但不告诉你"怎么想"——后者靠经验<br>
+            • 最好的产品经理不是最会写文档的，而是最会"问问题"的<br>
+            • "这个问题为什么重要？" 比 "这个问题怎么解决？" 更关键<br><br>
+            方法论像地图——它告诉你方向，但路还是要自己走。不要迷信框架，但要学会用它。
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag">方法论</span>
+          <span class="tag">需求判断</span>
+          <span class="tag">优先级</span>
+          <span class="tag">决策机制</span>
+        </div>
+      </div>
+
     </div>
   </div>
+
+  <footer>
+    <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+  </footer>
 </div>
 
 <script>
-const articles = [
-  {
-    url: 'ralphammer.com/j-j-gibson-the-meaning-of-the-world/',
-    title: 'J.J. Gibson — The Meaning of the World',
-    desc1: '我们是否被隔绝在外部世界之外，仅被困于个人经验之中？1979 年心理学家 J.J. Gibson 提出了一种不同的观点——它能改变我们看待世界的方式。',
-    desc2: 'Gibson 拒绝"间接感知"模型，提出"直接生态感知"：我们不是被动接收刺激的相机，而是用"身体在环境中的视觉系统"主动探索世界，从中拾取"可供性"（affordances）。',
-    tags: ['直接感知', '可供性', '环境设计'],
-    summary: 'Gibson 认为我们并非与一个无意义几何世界对峙的"外星灵魂"，而是栖息于环境中的动物。我们不断环顾四周，拾取环境所提供的机会。世界的意义不是头脑虚构的，而是动物与环境关系的产物——我们不是创造意义，而是发现它。',
-    note: 'article1.html'
-  },
-  {
-    url: 'jackkornfield.com/wise-thought/',
-    title: 'Wise Thought',
-    desc1: 'Jack Kornfield 分享关于正念与智慧的思考。在快节奏的现代生活中，如何保持内心的清明与觉察。',
-    desc2: '智慧的念头不是来自强迫性的思考，而是来自安静下来的心。当我们学会观察思维的流动而不被其裹挟，真正的洞察力自然涌现。',
-    tags: ['正念', '觉察', '内在平静'],
-    summary: '真正的智慧不是知识的积累，而是对当下经验的直接体察。Kornfield 提醒我们：在每一个呼吸之间，都有重新选择的可能性——放下执念，回到当下。',
-    note: 'article2.html'
-  },
-  {
-    url: 'pmthinking.notion.site/product-logic',
-    title: '产品经理的底层逻辑',
-    desc1: '产品沉思录精选文章，探讨产品经理如何建立系统性思维框架，从混沌中找到产品演化的线索。',
-    desc2: '好的产品经理不只是画原型、写 PRD，更是在用户、商业与技术之间找到最优平衡点。这需要一套可迭代的认知框架。',
-    tags: ['产品思维', '方法论', '框架'],
-    summary: '文章梳理了产品经理从需求洞察到方案落地的完整链路。核心观点：产品能力不是天赋，而是一套可以刻意练习的系统方法——从用户场景还原到数据验证，每一步都有其认知模型。',
-    note: 'article3.html'
-  }
-];
-
-let currentArticle = 0;
-
 function switchArticle(index) {
-  const i = index - 1;
-  currentArticle = i;
-  const art = articles[i];
-
-  document.querySelectorAll('.article-item').forEach((el, idx) => {
-    el.classList.toggle('active', idx === i);
-  });
-
-  document.getElementById('browserUrl').textContent = art.url;
-  const content = document.getElementById('browserContent');
-  content.style.opacity = '0';
-  content.style.transform = 'translateY(10px)';
-
-  setTimeout(() => {
-    content.innerHTML = `<h2>${art.title}</h2><p>${art.desc1}</p><div class="placeholder-img">📖 原文预览</div><p>${art.desc2}</p>`;
-    content.style.opacity = '1';
-    content.style.transform = 'translateY(0)';
-  }, 200);
-
-  const card = document.getElementById('summaryCard');
-  card.querySelector('.summary-tags').innerHTML = art.tags.map(t => `<span class="summary-tag">${t}</span>`).join('');
-  document.getElementById('summaryText').textContent = art.summary;
-  card.querySelector('.read-more-btn').href = art.note;
+  document.querySelectorAll('.article-section').forEach((s, i) => s.classList.toggle('active', i === index));
+  document.querySelectorAll('.article-nav-item').forEach((n, i) => n.classList.toggle('active', i === index));
 }
 </script>
-
-<footer>
-  <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
-</footer>
-</div>
 </body>
 </html>
