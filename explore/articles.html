@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHENG · 好文章推荐</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b10;
+    --surface: #10111a;
+    --text: #e2e4ea;
+    --accent: #7c6dff;
+    --accent2: #2dd4a8;
+    --muted: #9395a8;
+    --border: #1e1f2e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', 'Noto Serif SC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 1s ease;
+  }
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    transition: transform 0.2s;
+  }
+  .back-link:hover { transform: translateX(-4px); }
+
+  /* 主布局 */
+  .reads-layout {
+    display: flex;
+    gap: 32px;
+    padding: 48px 0;
+    min-height: calc(100vh - 260px);
+  }
+
+  /* 左侧文章列表 */
+  .article-list {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+  }
+  .article-list-title {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-item {
+    padding: 12px 16px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.45;
+    position: relative;
+  }
+  .article-item:hover {
+    opacity: 0.7;
+    background: rgba(124,109,255,0.08);
+  }
+  .article-item.active {
+    opacity: 1;
+    background: rgba(124,109,255,0.12);
+  }
+  .article-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .article-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .article-item-meta {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* 右侧预览区 */
+  .preview-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .browser-mockup {
+    background: #16172a;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #0c0d18;
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+  .browser-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .browser-dot:nth-child(1) { background: #ff5f57; }
+  .browser-dot:nth-child(2) { background: #febc2e; }
+  .browser-dot:nth-child(3) { background: #28c840; }
+  .browser-url {
+    flex: 1;
+    margin-left: 12px;
+    padding: 6px 12px;
+    background: var(--bg);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .browser-content {
+    padding: 32px;
+    min-height: 360px;
+    position: relative;
+    background: linear-gradient(135deg, #0f0f1a, #151528);
+  }
+  .browser-content h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .browser-content p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+  .browser-content .placeholder-img {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #1a1a2e, #222244);
+    border-radius: 8px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* 摘要卡片 */
+  .summary-card {
+    background: rgba(16,17,26,0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    margin-top: -40px;
+    z-index: 2;
+  }
+  .summary-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .summary-tag {
+    padding: 4px 12px;
+    background: rgba(124,109,255,0.15);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .summary-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 20px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .read-more-btn:hover { background: #6555e6; }
+
+  /* 动画 */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  footer p { color: var(--muted); font-size: 12px; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .reads-layout { flex-direction: column; }
+    .article-list { width: 100%; position: static; display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; }
+    .article-item { min-width: 180px; margin-bottom: 0; }
+    .browser-content { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="explore.html" class="back-link">← 返回上一页</a>
+    <h1>好文章推荐</h1>
+    <p class="subtitle">值得反复阅读的文章，附带阅读笔记与个人思考</p>
+  </header>
+
+  <div class="reads-layout">
+    <div class="article-list">
+      <div class="article-list-title">文章列表</div>
+      <div class="article-item active" data-article="1" onclick="switchArticle(1)">
+        <div class="article-item-title">J.J. Gibson：世界的意义</div>
+        <div class="article-item-meta">Ralph Ammer · 感知哲学</div>
+      </div>
+      <div class="article-item" data-article="2" onclick="switchArticle(2)">
+        <div class="article-item-title">Wise Thought</div>
+        <div class="article-item-meta">Jack Kornfield · 正念智慧</div>
+      </div>
+      <div class="article-item" data-article="3" onclick="switchArticle(3)">
+        <div class="article-item-title">产品经理的底层逻辑</div>
+        <div class="article-item-meta">产品沉思录 · 方法论</div>
+      </div>
+    </div>
+
+    <div class="preview-area">
+      <div class="browser-mockup" id="browserMockup">
+        <div class="browser-bar">
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-url" id="browserUrl">ralphammer.com/j-j-gibson-the-meaning-of-the-world/</div>
+        </div>
+        <div class="browser-content" id="browserContent">
+          <h2>J.J. Gibson — The Meaning of the World</h2>
+          <p>我们是否被隔绝在外部世界之外，仅被困于个人经验之中？1979 年心理学家 J.J. Gibson 提出了一种不同的观点——它能改变我们看待世界的方式。</p>
+          <div class="placeholder-img">📖 原文预览</div>
+          <p>Gibson 拒绝"间接感知"模型，提出"直接生态感知"：我们不是被动接收刺激的相机，而是用"身体在环境中的视觉系统"主动探索世界，从中拾取"可供性"（affordances）。</p>
+        </div>
+      </div>
+
+      <div class="summary-card" id="summaryCard">
+        <div class="summary-tags">
+          <span class="summary-tag">直接感知</span>
+          <span class="summary-tag">可供性</span>
+          <span class="summary-tag">环境设计</span>
+        </div>
+        <div class="summary-text" id="summaryText">
+          Gibson 认为我们并非与一个无意义几何世界对峙的"外星灵魂"，而是栖息于环境中的动物。我们不断环顾四周，拾取环境所提供的机会。世界的意义不是头脑虚构的，而是动物与环境关系的产物——我们不是创造意义，而是发现它。
+        </div>
+        <a href="article1.html" class="read-more-btn">📝 查看阅读笔记 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const articles = [
+  {
+    url: 'ralphammer.com/j-j-gibson-the-meaning-of-the-world/',
+    title: 'J.J. Gibson — The Meaning of the World',
+    desc1: '我们是否被隔绝在外部世界之外，仅被困于个人经验之中？1979 年心理学家 J.J. Gibson 提出了一种不同的观点——它能改变我们看待世界的方式。',
+    desc2: 'Gibson 拒绝"间接感知"模型，提出"直接生态感知"：我们不是被动接收刺激的相机，而是用"身体在环境中的视觉系统"主动探索世界，从中拾取"可供性"（affordances）。',
+    tags: ['直接感知', '可供性', '环境设计'],
+    summary: 'Gibson 认为我们并非与一个无意义几何世界对峙的"外星灵魂"，而是栖息于环境中的动物。我们不断环顾四周，拾取环境所提供的机会。世界的意义不是头脑虚构的，而是动物与环境关系的产物——我们不是创造意义，而是发现它。',
+    note: 'article1.html'
+  },
+  {
+    url: 'jackkornfield.com/wise-thought/',
+    title: 'Wise Thought',
+    desc1: 'Jack Kornfield 分享关于正念与智慧的思考。在快节奏的现代生活中，如何保持内心的清明与觉察。',
+    desc2: '智慧的念头不是来自强迫性的思考，而是来自安静下来的心。当我们学会观察思维的流动而不被其裹挟，真正的洞察力自然涌现。',
+    tags: ['正念', '觉察', '内在平静'],
+    summary: '真正的智慧不是知识的积累，而是对当下经验的直接体察。Kornfield 提醒我们：在每一个呼吸之间，都有重新选择的可能性——放下执念，回到当下。',
+    note: 'article2.html'
+  },
+  {
+    url: 'pmthinking.notion.site/product-logic',
+    title: '产品经理的底层逻辑',
+    desc1: '产品沉思录精选文章，探讨产品经理如何建立系统性思维框架，从混沌中找到产品演化的线索。',
+    desc2: '好的产品经理不只是画原型、写 PRD，更是在用户、商业与技术之间找到最优平衡点。这需要一套可迭代的认知框架。',
+    tags: ['产品思维', '方法论', '框架'],
+    summary: '文章梳理了产品经理从需求洞察到方案落地的完整链路。核心观点：产品能力不是天赋，而是一套可以刻意练习的系统方法——从用户场景还原到数据验证，每一步都有其认知模型。',
+    note: 'article3.html'
+  }
+];
+
+let currentArticle = 0;
+
+function switchArticle(index) {
+  const i = index - 1;
+  currentArticle = i;
+  const art = articles[i];
+
+  document.querySelectorAll('.article-item').forEach((el, idx) => {
+    el.classList.toggle('active', idx === i);
+  });
+
+  document.getElementById('browserUrl').textContent = art.url;
+  const content = document.getElementById('browserContent');
+  content.style.opacity = '0';
+  content.style.transform = 'translateY(10px)';
+
+  setTimeout(() => {
+    content.innerHTML = `<h2>${art.title}</h2><p>${art.desc1}</p><div class="placeholder-img">📖 原文预览</div><p>${art.desc2}</p>`;
+    content.style.opacity = '1';
+    content.style.transform = 'translateY(0)';
+  }, 200);
+
+  const card = document.getElementById('summaryCard');
+  card.querySelector('.summary-tags').innerHTML = art.tags.map(t => `<span class="summary-tag">${t}</span>`).join('');
+  document.getElementById('summaryText').textContent = art.summary;
+  card.querySelector('.read-more-btn').href = art.note;
+}
+</script>
+
+<footer>
+  <p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p>
+</footer>
+</div>
+</body>
+</html>
