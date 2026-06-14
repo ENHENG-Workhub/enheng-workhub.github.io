@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通识与人文素养库 · ENHENG</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0b10;--surface:#10111a;--text:#e2e4ea;--accent:#ffe66d;--muted:#9395a8;--border:#1e1f2e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans','Noto Serif SC',serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{padding:60px 24px 48px;max-width:1200px;margin:0 auto}
+.hero-back{display:inline-block;color:var(--accent);text-decoration:none;font-size:14px;padding:8px 16px;border:1px solid var(--accent);border-radius:20px;margin-bottom:32px;transition:all .3s}
+.hero-back:hover{background:var(--accent);color:var(--bg)}
+.hero-title{font-family:'Noto Serif SC',serif;font-size:36px;font-weight:700;margin-bottom:12px}
+.hero-slogan{color:var(--muted);font-size:16px}
+.sticky-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,11,16,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transform:translateY(-100%);transition:transform .3s}
+.sticky-header.visible{transform:translateY(0)}
+.sticky-row1{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:1200px;margin:0 auto}
+.sticky-back{color:var(--muted);text-decoration:none;font-size:14px;transition:color .3s}
+.sticky-back:hover{color:var(--accent)}
+.sticky-title{color:var(--accent);font-size:16px;font-weight:600}
+.sticky-row2{padding:0 24px 12px;max-width:1200px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.sticky-row2::-webkit-scrollbar{display:none}
+.module-tab{padding:8px 16px;background:transparent;border:1px solid var(--border);border-radius:20px;color:var(--muted);font-size:13px;cursor:pointer;white-space:nowrap;transition:all .3s;text-decoration:none}
+.module-tab:hover,.module-tab.active{background:var(--surface);border-color:var(--accent);color:var(--text)}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:0 24px}
+.sidebar{display:none}
+@media(min-width:1024px){
+.sidebar{display:block;width:260px;position:sticky;top:120px;height:fit-content;padding-right:32px;border-right:1px solid var(--border)}
+.nav-module{cursor:pointer;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--muted);transition:all .3s}
+.nav-module:hover,.nav-module.open{background:var(--surface);color:var(--text)}
+.nav-sub{display:none;padding:8px 0 8px 20px;flex-direction:column;gap:4px}
+.nav-module.open+.nav-sub{display:flex}
+.nav-sub a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:6px;transition:all .3s}
+.nav-sub a:hover{color:var(--accent);background:rgba(255,230,109,.1)}
+}
+.content{flex:1;padding-bottom:100px}
+@media(min-width:1024px){.content{padding-left:32px}}
+.module{padding-top:32px}
+.module-header{font-family:'Noto Serif SC',serif;font-size:28px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.sub-category{margin-bottom:32px}
+.sub-title{font-size:18px;font-weight:600;margin-bottom:16px;color:var(--text);display:flex;align-items:center;gap:8px}
+.sub-title::before{content:'';width:4px;height:18px;background:var(--accent);border-radius:2px}
+.article-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+.article-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);color:var(--text);text-decoration:none;font-size:14px;transition:color .3s}
+.article-item:last-child{border-bottom:none}
+.article-item:hover{color:var(--accent)}
+.article-source{font-size:12px;color:var(--muted);background:var(--bg);padding:2px 8px;border-radius:4px;flex-shrink:0;margin-left:12px}
+.my-notes{background:var(--surface);border:1px dashed var(--border);border-radius:12px;padding:20px;margin-top:12px}
+.my-notes-title{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--accent)}
+.my-notes-placeholder{font-size:13px;color:var(--muted)}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="hero">
+  <a href="../wiki.html" class="hero-back">← 返回知识库</a>
+  <h1 class="hero-title">通识与人文素养库</h1>
+  <p class="hero-slogan">看似无用，实则大用，同理心的终极来源</p>
+</div>
+
+<div class="sticky-header" id="stickyHeader">
+  <div class="sticky-row1">
+    <a href="../wiki.html" class="sticky-back">← 返回知识库</a>
+    <span class="sticky-title">通识与人文素养库</span>
+  </div>
+  <div class="sticky-row2">
+    <a href="#module1" class="module-tab active" data-target="module1">经济学常识</a>
+    <a href="#module2" class="module-tab" data-target="module2">社会学与人类学</a>
+    <a href="#module3" class="module-tab" data-target="module3">历史与哲学</a>
+    <a href="#module4" class="module-tab" data-target="module4">经典产品拆解</a>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <div class="nav-module open" onclick="toggleModule(this)">模块一：经济学常识</div>
+      <div class="nav-sub">
+        <a href="#m1-business">核心商业规律</a>
+      </div>
+      <div class="nav-module" onclick="toggleModule(this)">模块二：社会学与人类学</div>
+      <div class="nav-sub">
+        <a href="#m2-group">群体与社会网络</a>
+      </div>
+      <div class="nav-module" onclick="toggleModule(this)">模块三：历史与哲学</div>
+      <div class="nav-sub">
+        <a href="#m3-human">人性洞察</a>
+      </div>
+      <div class="nav-module" onclick="toggleModule(this)">模块四：经典产品拆解</div>
+      <div class="nav-sub">
+        <a href="#m4-case">迭代史复盘</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="module" id="module1">
+      <div class="module-header">模块一：经济学常识</div>
+      
+      <div class="sub-category" id="m1-business">
+        <div class="sub-title">核心商业规律</div>
+        <div class="article-box">
+          <a href="https://www.woshipm.com/it/5645678.html" target="_blank" class="article-item">交易成本理论在互联网产品中的应用<span class="article-source">人人都是产品经理</span></a>
+          <a href="https://www.woshipm.com/pd/5598743.html" target="_blank" class="article-item">边际效用递减与产品功能设计<span class="article-source">人人都是产品经理</span></a>
+        </div>
+        <div class="my-notes"><div class="my-notes-title">📝 我的方法论沉淀</div><div class="my-notes-placeholder">暂无内容，点击编辑添加你的思考...</div></div>
+      </div>
+    </div>
+
+    <div class="module" id="module2">
+      <div class="module-header">模块二：社会学与人类学</div>
+      
+      <div class="sub-category" id="m2-group">
+        <div class="sub-title">群体与社会网络</div>
+        <div class="article-box">
+          <a href="https://www.woshipm.com/it/5576432.html" target="_blank" class="article-item">圈层文化与社区产品设计<span class="article-source">人人都是产品经理</span></a>
+          <a href="https://www.woshipm.com/operate/5534218.html" target="_blank" class="article-item">社会网络分析在用户增长中的应用<span class="article-source">人人都是产品经理</span></a>
+        </div>
+        <div class="my-notes"><div class="my-notes-title">📝 我的方法论沉淀</div><div class="my-notes-placeholder">暂无内容，点击编辑添加你的思考...</div></div>
+      </div>
+    </div>
+
+    <div class="module" id="module3">
+      <div class="module-header">模块三：历史与哲学</div>
+      
+      <div class="sub-category" id="m3-human">
+        <div class="sub-title">人性洞察</div>
+        <div class="article-box">
+          <a href="https://www.woshipm.com/pd/5512876.html" target="_blank" class="article-item">理解人性：产品经理的底层认知<span class="article-source">人人都是产品经理</span></a>
+          <a href="https://www.woshipm.com/zhichang/5498765.html" target="_blank" class="article-item">从历史看产品兴衰：不变的人性法则<span class="article-source">人人都是产品经理</span></a>
+        </div>
+        <div class="my-notes"><div class="my-notes-title">📝 我的方法论沉淀</div><div class="my-notes-placeholder">暂无内容，点击编辑添加你的思考...</div></div>
+      </div>
+    </div>
+
+    <div class="module" id="module4">
+      <div class="module-header">模块四：经典产品拆解</div>
+      
+      <div class="sub-category" id="m4-case">
+        <div class="sub-title">迭代史复盘</div>
+        <div class="article-box">
+          <a href="https://blog.csdn.net/weixin_30918415/article/details/98612474" target="_blank" class="article-item">微信发展历程与分析：从通讯到超级App<span class="article-source">CSDN</span></a>
+          <a href="https://blog.csdn.net/shuize123/article/details/124117801" target="_blank" class="article-item">微信产品分析：亮点与改进空间<span class="article-source">CSDN</span></a>
+          <a href="https://www.woshipm.com/evaluating/5687432.html" target="_blank" class="article-item">抖音产品演进：算法驱动的内容帝国<span class="article-source">人人都是产品经理</span></a>
+        </div>
+        <div class="my-notes"><div class="my-notes-title">📝 我的方法论沉淀</div><div class="my-notes-placeholder">暂无内容，点击编辑添加你的思考...</div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer><p>© 2026 ENHENG · <a href="https://github.com/ENHENG-Workhub">GitHub</a></p></footer>
+
+<script>
+const hero = document.querySelector('.hero');
+const stickyHeader = document.getElementById('stickyHeader');
+window.addEventListener('scroll', () => {
+  stickyHeader.classList.toggle('visible', window.scrollY > hero.offsetHeight - 50);
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' });
+  });
+});
+const tabs = document.querySelectorAll('.module-tab');
+const modules = document.querySelectorAll('.module');
+window.addEventListener('scroll', () => {
+  let current = '';
+  modules.forEach(m => { if (window.scrollY >= m.offsetTop - 150) current = m.id; });
+  tabs.forEach(t => { t.classList.remove('active'); if (t.dataset.target === current) t.classList.add('active'); });
+});
+function toggleModule(el) { 
+  document.querySelectorAll('.nav-module').forEach(m => { if(m !== el) m.classList.remove('open'); });
+  el.classList.toggle('open'); 
+}
+</script>
+</body>
+</html>
