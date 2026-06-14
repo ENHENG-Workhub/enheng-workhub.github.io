@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -12,6 +13,10 @@
     --text: #e2e4ea;
     --accent: #7c6dff;
     --accent2: #2dd4a8;
+    --accent3: #ffa03c;
+    --accent4: #ff6b9d;
+    --accent5: #4ecdc4;
+    --accent6: #ffe66d;
     --muted: #9395a8;
     --border: #1e1f2e;
   }
@@ -23,105 +28,134 @@
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
-  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
   header {
     padding: 60px 0 40px;
     border-bottom: 1px solid var(--border);
     animation: fadeUp 1s ease;
   }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+  .back-link:hover {
+    background: var(--accent);
+    color: #fff;
+  }
   h1 {
     font-family: 'Noto Serif SC', serif;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   .subtitle {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 300;
   }
 
   main { padding: 48px 0 100px; }
 
-  .wiki-category {
-    margin-bottom: 48px;
+  /* 知识库分类 */
+  .kb-section {
+    margin-bottom: 56px;
   }
-  .wiki-category-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 20px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .wiki-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  .kb-header {
+    display: flex;
+    align-items: center;
     gap: 12px;
+    margin-bottom: 20px;
   }
-  .wiki-item {
-    padding: 16px;
+  .kb-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .kb-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .kb-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* 模块卡片网格 */
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 768px) {
+    .module-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .module-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .module-card {
+    display: block;
+    padding: 20px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 12px;
     text-decoration: none;
     color: var(--text);
-    transition: all 0.3s ease;
+    transition: all 0.3s;
   }
-  .wiki-item:hover {
+  .module-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 0 16px rgba(124,109,255,0.12);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,109,255,0.1);
   }
-  .wiki-item-title {
-    font-size: 15px;
+  .module-name {
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 6px;
   }
-  .wiki-item-desc {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 300;
-    line-height: 1.6;
-  }
-  .wiki-item-tag {
-    font-size: 11px;
-    color: var(--accent2);
-    margin-top: 8px;
-  }
-
-  .back-link {
-    display: inline-block;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 13px;
-    margin-bottom: 24px;
-    transition: color 0.2s;
-  }
-  .back-link:hover { color: var(--accent); }
-
-  footer {
-    padding: 40px 0;
-    border-top: 1px solid var(--border);
+  .module-brief {
     font-size: 12px;
     color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* 颜色主题 */
+  .theme-industry .kb-icon { background: rgba(124,109,255,0.15); }
+  .theme-product .kb-icon { background: rgba(45,212,168,0.15); }
+  .theme-data .kb-icon { background: rgba(255,160,60,0.15); }
+  .theme-tech .kb-icon { background: rgba(255,107,157,0.15); }
+  .theme-soft .kb-icon { background: rgba(78,205,196,0.15); }
+  .theme-general .kb-icon { background: rgba(255,230,109,0.15); }
+
+  footer {
     text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
   }
   footer a { color: var(--accent); text-decoration: none; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 600px) {
-    header { padding: 36px 0 28px; }
-    h1 { font-size: 22px; }
-    .wiki-grid { grid-template-columns: 1fr; }
-  }
 </style>
 </head>
 <body>
@@ -129,69 +163,156 @@
   <header>
     <a href="index.html" class="back-link">← 返回主页</a>
     <h1>知识库</h1>
-    <p class="subtitle">方法论、模板、SOP 与个人知识体系</p>
+    <p class="subtitle">知识这东西，用的时候恨少，学的时候嫌多</p>
   </header>
 
   <main>
-    <div class="wiki-category">
-      <div class="wiki-category-title">📋 产品方法论</div>
-      <div class="wiki-grid">
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">用户需求分析框架</div>
-          <div class="wiki-item-desc">从模糊反馈到清晰需求的完整拆解流程</div>
-          <div class="wiki-item-tag">方法论 · 持续更新</div>
+    <!-- 1. 行业与业务知识库 -->
+    <div class="kb-section theme-industry">
+      <div class="kb-header">
+        <div class="kb-icon">🏭</div>
+        <div>
+          <div class="kb-title">行业与业务知识库</div>
+          <div class="kb-desc">从宏观到微观、从外部到内部</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/industry.html#module1" class="module-card">
+          <div class="module-name">模块一</div>
+          <div class="module-brief">行业宏观认知</div>
         </a>
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">产品复盘模板</div>
-          <div class="wiki-item-desc">每次迭代后的标准复盘结构，包含数据回顾、决策复盘、改进方向</div>
-          <div class="wiki-item-tag">模板 · 可直接复用</div>
+        <a href="wiki/industry.html#module2" class="module-card">
+          <div class="module-name">模块二</div>
+          <div class="module-brief">竞品与动态监测</div>
         </a>
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">PRD 撰写规范</div>
-          <div class="wiki-item-desc">如何写一份让开发看得懂、愿意看的产品需求文档</div>
-          <div class="wiki-item-tag">SOP · 实战积累</div>
+        <a href="wiki/industry.html#module3" class="module-card">
+          <div class="module-name">模块三</div>
+          <div class="module-brief">商业模式</div>
         </a>
       </div>
     </div>
 
-    <div class="wiki-category">
-      <div class="wiki-category-title">🧪 测试与质量</div>
-      <div class="wiki-grid">
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">测试用例设计指南</div>
-          <div class="wiki-item-desc">边界值、等价类、场景法的实际应用场景</div>
-          <div class="wiki-item-tag">指南</div>
+    <!-- 2. 产品专业硬技能库 -->
+    <div class="kb-section theme-product">
+      <div class="kb-header">
+        <div class="kb-icon">🛠️</div>
+        <div>
+          <div class="kb-title">产品专业硬技能库</div>
+          <div class="kb-desc">从用户洞察到需求落地、从抽象概念到具象体验</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/product.html#module1" class="module-card">
+          <div class="module-name">模块一</div>
+          <div class="module-brief">用户研究与洞察</div>
         </a>
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">缺陷管理 SOP</div>
-          <div class="wiki-item-desc">从发现、记录、跟踪到回归验证的标准化流程</div>
-          <div class="wiki-item-tag">SOP</div>
+        <a href="wiki/product.html#module2" class="module-card">
+          <div class="module-name">模块二</div>
+          <div class="module-brief">产品设计与运营</div>
+        </a>
+        <a href="wiki/product.html#module3" class="module-card">
+          <div class="module-name">模块三</div>
+          <div class="module-brief">项目管理与交付</div>
         </a>
       </div>
     </div>
 
-    <div class="wiki-category">
-      <div class="wiki-category-title">💡 个人工具集</div>
-      <div class="wiki-grid">
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">我的效率工具清单</div>
-          <div class="wiki-item-desc">日常使用的工具、插件、自动化流程汇总</div>
-          <div class="wiki-item-tag">工具</div>
+    <!-- 3. 数据与分析能力库 -->
+    <div class="kb-section theme-data">
+      <div class="kb-header">
+        <div class="kb-icon">📊</div>
+        <div>
+          <div class="kb-title">数据与分析能力库</div>
+          <div class="kb-desc">从指标定义到归因分析、从底层取数到业务决策</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/data.html#module1" class="module-card">
+          <div class="module-name">模块一</div>
+          <div class="module-brief">指标体系搭建</div>
         </a>
-        <a href="#" class="wiki-item">
-          <div class="wiki-item-title">知识管理方法论</div>
-          <div class="wiki-item-desc">如何构建个人的知识体系，让碎片信息变成可用资产</div>
-          <div class="wiki-item-tag">方法论</div>
+        <a href="wiki/data.html#module2" class="module-card">
+          <div class="module-name">模块二</div>
+          <div class="module-brief">分析方法论与工具</div>
         </a>
       </div>
     </div>
 
-    <div class="wiki-category">
-      <div class="wiki-category-title">📌 待补充</div>
-      <div class="wiki-grid">
-        <a href="#" class="wiki-item" style="border-style:dashed;">
-          <div class="wiki-item-title" style="color:var(--muted);">新的知识条目...</div>
-          <div class="wiki-item-desc">持续积累中，每有新的沉淀就更新到这里</div>
+    <!-- 4. 技术认知库 -->
+    <div class="kb-section theme-tech">
+      <div class="kb-header">
+        <div class="kb-icon">💻</div>
+        <div>
+          <div class="kb-title">技术认知库</div>
+          <div class="kb-desc">不要求会写代码，但必须理解技术逻辑</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/tech.html#module1" class="module-card">
+          <div class="module-name">技术理解</div>
+          <div class="module-brief">前后端/数据库/API</div>
+        </a>
+        <a href="wiki/tech.html#module2" class="module-card">
+          <div class="module-name">技术前沿</div>
+          <div class="module-brief">AI/区块链/IoT/Web3</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. 通用能力与软技能库 -->
+    <div class="kb-section theme-soft">
+      <div class="kb-header">
+        <div class="kb-icon">🤝</div>
+        <div>
+          <div class="kb-title">通用能力与软技能库</div>
+          <div class="kb-desc">有比没有好</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/soft.html#module1" class="module-card">
+          <div class="module-name">模块一</div>
+          <div class="module-brief">沟通表达与协作推动</div>
+        </a>
+        <a href="wiki/soft.html#module2" class="module-card">
+          <div class="module-name">模块二</div>
+          <div class="module-brief">逻辑思维与认知模型</div>
+        </a>
+        <a href="wiki/soft.html#module3" class="module-card">
+          <div class="module-name">模块三</div>
+          <div class="module-brief">社会心理学</div>
+        </a>
+        <a href="wiki/soft.html#module4" class="module-card">
+          <div class="module-name">模块四</div>
+          <div class="module-brief">自我管理与成长</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. 通识与人文素养库 -->
+    <div class="kb-section theme-general">
+      <div class="kb-header">
+        <div class="kb-icon">📚</div>
+        <div>
+          <div class="kb-title">通识与人文素养库</div>
+          <div class="kb-desc">看似无用，实则大用，同理心的终极来源</div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a href="wiki/general.html#module1" class="module-card">
+          <div class="module-name">模块一</div>
+          <div class="module-brief">经济学常识</div>
+        </a>
+        <a href="wiki/general.html#module2" class="module-card">
+          <div class="module-name">模块二</div>
+          <div class="module-brief">社会学与人类学</div>
+        </a>
+        <a href="wiki/general.html#module3" class="module-card">
+          <div class="module-name">模块三</div>
+          <div class="module-brief">历史与哲学</div>
+        </a>
+        <a href="wiki/general.html#module4" class="module-card">
+          <div class="module-name">模块四</div>
+          <div class="module-brief">经典产品拆解</div>
         </a>
       </div>
     </div>
